@@ -1,6 +1,7 @@
 export * from "./WelcomeScreen"
 
-export * from "./LoginScreen"
+export * as Authentication from "./Authentication"
+export * as Home from "./Home"
 export * from "./DemoCommunityScreen"
 export * from "./DemoDebugScreen"
 export * from "./DemoShowroomScreen/DemoShowroomScreen"

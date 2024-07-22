@@ -1,16 +1,16 @@
 import { observer } from "mobx-react-lite"
 import React, { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
-import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
-import { useStores } from "../models"
-import { AppStackScreenProps } from "../navigators"
-import { colors, spacing } from "../theme"
+import { TextInput, TextStyle, ViewStyle, View } from "react-native"
+import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../../components"
+import { useStores } from "../../models"
+import { AppStackScreenProps } from "../../navigators"
+import { colors, spacing } from "../../theme"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
   const authPasswordInput = useRef<TextInput>(null)
-
+  const { navigation } = _props
   const [authPassword, setAuthPassword] = useState("")
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -65,7 +65,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       },
     [isAuthPasswordHidden],
   )
-
+  function register() {
+    navigation.navigate("Register")
+  }
   return (
     <Screen
       preset="auto"
@@ -113,10 +115,31 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         preset="reversed"
         onPress={login}
       />
+      <View style={$optionalSignupView}>
+        <Text tx="loginScreen.newUser" preset="formHelper" />
+        <Button
+          preset="default"
+          tx="loginScreen.signUp"
+          textStyle={$signUpButtonText}
+          style={$signUpButton}
+          onPress={register}
+        />
+      </View>
     </Screen>
   )
 })
 
+const $signUpButton: ViewStyle = {
+  backgroundColor: "transparent",
+  borderWidth: 0,
+  alignItems: "flex-start",
+  marginTop: -spacing.xs,
+}
+
+const $signUpButtonText: TextStyle = {
+  textDecorationLine: "underline",
+  fontSize: 16,
+}
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
   paddingHorizontal: spacing.lg,
@@ -140,5 +163,10 @@ const $textField: ViewStyle = {
 }
 
 const $tapButton: ViewStyle = {
+  marginTop: spacing.xs,
+}
+
+const $optionalSignupView: ViewStyle = {
+  flexDirection: "row",
   marginTop: spacing.xs,
 }

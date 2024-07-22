@@ -49,6 +49,14 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Vapi Playground needs camera access to work</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Vapi Playground needs microphone access to work</string>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>voip</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
